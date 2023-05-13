@@ -1,0 +1,21 @@
+package tn.esprit.DAO.config;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.springframework.stereotype.Component;
+
+
+@Component
+@Aspect
+public class LoggingAspect {
+    private  static final Logger logger = LogManager.getLogger(LoggingAspect.class);
+    @After("execution(* tn.esprit.Services.Services.get*(..) )")
+    public void logMethodEntry(JoinPoint joinPoint){
+        String name = joinPoint.getSignature().getName();
+        logger.info("Bon Courage ! "+name);
+    }
+}
